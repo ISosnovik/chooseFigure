@@ -12,6 +12,8 @@ let bestScoreKey = "BestScore"
 
 class GameScene: SKScene {
     
+    var level: Int = 1
+    
     // Score settings
     private var bestScore: Int? {
         get {
@@ -24,10 +26,10 @@ class GameScene: SKScene {
         }
     }
     
-    var currentScore: Int? {
+    var currentScore: Int {
         
         get {
-            return self.currentScore ?? 0
+            return self.level - 1
         }
 
         set {
@@ -38,22 +40,34 @@ class GameScene: SKScene {
         }
     }
     
-    // Main lifecycle setups
+    
+    var levelLabelNode: SKLabelNode?
+    var rightFigureNode: SKSpriteNode?
+    var deckNodes: [SKSpriteNode] = []
+    
+    
+    // preparations
     override func didMoveToView(view: SKView) {
         
+        // connect nodes with scene
+        self.levelLabelNode = childNodeWithName("level") as? SKLabelNode
+        self.rightFigureNode = childNodeWithName("rightFigure") as? SKSpriteNode
         
+        enumerateChildNodesWithName("//*") {
+            node, stop in
+            if node.name == "figure" {
+                self.deckNodes.append(node as! SKSpriteNode)
+            }
+        }
+        
+        // configure the lebel label
+        self.levelLabelNode?.text = String(level)
     }
     
 }
 
 
-extension GameScene {
-    
-    func newLevel() {
-        
-    }
-        
-}
+
 
 
 
