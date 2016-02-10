@@ -14,6 +14,7 @@
 		850642EA1C67DC0700A61813 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 850642E81C67DC0700A61813 /* Main.storyboard */; };
 		850642EC1C67DC0700A61813 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 850642EB1C67DC0700A61813 /* Assets.xcassets */; };
 		850642EF1C67DC0700A61813 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 850642ED1C67DC0700A61813 /* LaunchScreen.storyboard */; };
+		8541E9361C6B628A00E15F54 /* Deck.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8541E9351C6B628A00E15F54 /* Deck.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		850642EB1C67DC0700A61813 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		850642EE1C67DC0700A61813 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		850642F01C67DC0700A61813 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8541E9351C6B628A00E15F54 /* Deck.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Deck.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +60,8 @@
 		850642DF1C67DC0700A61813 /* Choose Figure */ = {
 			isa = PBXGroup;
 			children = (
+				8541E9341C6B616A00E15F54 /* Scenes */,
 				850642E01C67DC0700A61813 /* AppDelegate.swift */,
-				850642E21C67DC0700A61813 /* GameScene.sks */,
-				850642E41C67DC0700A61813 /* GameScene.swift */,
 				850642E61C67DC0700A61813 /* GameViewController.swift */,
 				850642E81C67DC0700A61813 /* Main.storyboard */,
 				850642EB1C67DC0700A61813 /* Assets.xcassets */,
@@ -68,6 +69,16 @@
 				850642F01C67DC0700A61813 /* Info.plist */,
 			);
 			path = "Choose Figure";
+			sourceTree = "<group>";
+		};
+		8541E9341C6B616A00E15F54 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				850642E21C67DC0700A61813 /* GameScene.sks */,
+				8541E9351C6B628A00E15F54 /* Deck.sks */,
+				850642E41C67DC0700A61813 /* GameScene.swift */,
+			);
+			name = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +142,7 @@
 				850642E31C67DC0700A61813 /* GameScene.sks in Resources */,
 				850642EF1C67DC0700A61813 /* LaunchScreen.storyboard in Resources */,
 				850642EC1C67DC0700A61813 /* Assets.xcassets in Resources */,
+				8541E9361C6B628A00E15F54 /* Deck.sks in Resources */,
 				850642EA1C67DC0700A61813 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,6 +306,7 @@
 				850642F51C67DC0700A61813 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
