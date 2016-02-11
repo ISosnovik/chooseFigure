@@ -42,6 +42,7 @@ class GameScene: SKScene {
     }
     
 }
+// MARK: - Event Delegation
 
 extension GameScene: GameEvents {
     
@@ -54,7 +55,6 @@ extension GameScene: GameEvents {
     
 }
 
-
 extension GameScene {
     
     func gameOver() {
@@ -66,6 +66,17 @@ extension GameScene {
     }
 }
 
+// MARK: - Touches
+
+extension GameScene {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
+            let position = touch.locationInNode(self)
+            let node = self.nodeAtPoint(position)
+
+        }
+    }
+}
 
 
 

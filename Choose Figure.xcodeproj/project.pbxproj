@@ -19,6 +19,7 @@
 		859F43CF1C6CBC4400615C18 /* GameActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859F43CE1C6CBC4400615C18 /* GameActions.swift */; };
 		859F43D11C6CBCB300615C18 /* GameEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859F43D01C6CBCB300615C18 /* GameEvents.swift */; };
 		859F43D31C6CD29800615C18 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859F43D21C6CD29800615C18 /* GameLogic.swift */; };
+		859F43DB1C6CFFA400615C18 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859F43DA1C6CFFA400615C18 /* Int.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		859F43D01C6CBCB300615C18 /* GameEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEvents.swift; sourceTree = "<group>"; };
 		859F43D21C6CD29800615C18 /* GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		859F43D81C6CDDBB00615C18 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		859F43DA1C6CFFA400615C18 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		850642DF1C67DC0700A61813 /* Choose Figure */ = {
 			isa = PBXGroup;
 			children = (
+				859F43DA1C6CFFA400615C18 /* Int.swift */,
 				859F43D71C6CDA7100615C18 /* Configs */,
 				859F43D41C6CD2AA00615C18 /* Logic */,
 				8541E9341C6B616A00E15F54 /* Scenes */,
@@ -186,6 +189,7 @@
 				859F43D31C6CD29800615C18 /* GameLogic.swift in Sources */,
 				850642E51C67DC0700A61813 /* GameScene.swift in Sources */,
 				850642E71C67DC0700A61813 /* GameViewController.swift in Sources */,
+				859F43DB1C6CFFA400615C18 /* Int.swift in Sources */,
 				850642E11C67DC0700A61813 /* AppDelegate.swift in Sources */,
 				859F43CF1C6CBC4400615C18 /* GameActions.swift in Sources */,
 				859F43D11C6CBCB300615C18 /* GameEvents.swift in Sources */,
