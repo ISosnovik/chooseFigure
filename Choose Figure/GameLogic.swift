@@ -10,19 +10,46 @@ import SpriteKit
 
 let minNumberOfFigures = 4 // minimal number of figures to choose in level
 let maxNumberOfFigures = 6 // maximal number of figures to choose in level
+let bestScoreKey = "BestScore"
 
 class GameLogic {
     
     var delegate: GameEvents?
     
     var chosenFigureIndex: Int?
-    var chosenFigureName: String?
     
     var figureIndeces: [Int] = [] // array of indeces of figures
-    var figureNames: [String] = [] // array of names of figures
+    var availableNames: [String] = [] // array of names of figures available in this level
     
     var numberOfFigures: Int? // number of figures required to choose
     var chosenNumberOfFigures: Int? // number of chose figures
+    
+    // Score settings
+    var bestScore: Int {
+        get {
+            return NSUserDefaults.standardUserDefaults().integerForKey(bestScoreKey) ?? 0
+        }
+        
+        set {
+            NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: bestScoreKey)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    
+    var score: Int {
+        
+        get {
+            return self.delegate?.level ?? 1 - 1
+        }
+        
+        set {
+            self.score = newValue
+            if score > bestScore {
+                self.bestScore = score
+            }
+        }
+    }
+    
     
     required init(delegate: GameEvents) {
         self.delegate = delegate
@@ -31,11 +58,22 @@ class GameLogic {
         self.numberOfFigures = Int(Float(drand48()) * Float((maxNumberOfFigures - minNumberOfFigures))) + minNumberOfFigures
         
         let level = delegate.level
-        self.figureNames = figureNamesForLevel(level)
+        self.availableNames = figureNamesForLevel(level)
+        
+        self.chosenFigureIndex = Int(arc4random_uniform(UInt32(availableNames.count)))
+        
+        
     }
     
+    
+}
+
+
+// MARK: - Initial Setups
+
+extension GameLogic {
+    
     private func figureNamesForLevel(level: Int) -> [String] {
-        
         if level > 88 {
             return figureNamesForLevel(88)
         }
@@ -50,5 +88,22 @@ class GameLogic {
             return figureNamesForLevel(level - 1) + newImageName
         }
     }
-    
 }
+
+
+// MARK: Actions
+
+extension GameLogic: GameActions {
+    
+    func userDidChoice(index: Int) {
+        
+    }
+}
+
+
+
+
+
+
+
+

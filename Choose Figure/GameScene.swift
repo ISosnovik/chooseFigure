@@ -8,39 +8,13 @@
 
 import SpriteKit
 
-let bestScoreKey = "BestScore"
+
 
 class GameScene: SKScene {
     
     var level: Int = 1
-    
-    // Score settings
-    private var bestScore: Int? {
-        get {
-            return NSUserDefaults.standardUserDefaults().integerForKey(bestScoreKey) ?? 0
-        }
+    var logic: GameLogic?
         
-        set {
-            NSUserDefaults.standardUserDefaults().setInteger(newValue!, forKey: bestScoreKey)
-            NSUserDefaults.standardUserDefaults().synchronize()
-        }
-    }
-    
-    var currentScore: Int {
-        
-        get {
-            return self.level - 1
-        }
-
-        set {
-            self.currentScore = newValue
-            if currentScore > bestScore {
-                self.bestScore = currentScore
-            }
-        }
-    }
-    
-    
     var levelLabelNode: SKLabelNode?
     var rightFigureNode: SKSpriteNode?
     var deckNodes: [SKSpriteNode] = []
@@ -48,7 +22,8 @@ class GameScene: SKScene {
     
     // preparations
     override func didMoveToView(view: SKView) {
-        
+        // configure logic
+        self.logic = GameLogic(delegate: self)        
         // connect nodes with scene
         self.levelLabelNode = childNodeWithName("level") as? SKLabelNode
         self.rightFigureNode = childNodeWithName("rightFigure") as? SKSpriteNode
@@ -63,10 +38,32 @@ class GameScene: SKScene {
         // configure the lebel label
         self.levelLabelNode?.text = String(level)
         
-        let path = NSBundle.mainBundle().pathForResource("Images", ofType: "plist")
         
     }
     
+}
+
+extension GameScene: GameEvents {
+    
+    func userDidRightChoice() {
+        
+    }
+    func userDidWrongChoice() {
+        
+    }
+    
+}
+
+
+extension GameScene {
+    
+    func gameOver() {
+        
+    }
+    
+    func moveToNextLevel() {
+        
+    }
 }
 
 
