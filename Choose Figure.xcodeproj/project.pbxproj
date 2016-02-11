@@ -15,6 +15,10 @@
 		850642EC1C67DC0700A61813 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 850642EB1C67DC0700A61813 /* Assets.xcassets */; };
 		850642EF1C67DC0700A61813 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 850642ED1C67DC0700A61813 /* LaunchScreen.storyboard */; };
 		8541E9361C6B628A00E15F54 /* Deck.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8541E9351C6B628A00E15F54 /* Deck.sks */; };
+		859F43CD1C6CBAAE00615C18 /* etna.otf in Resources */ = {isa = PBXBuildFile; fileRef = 859F43CC1C6CBAAE00615C18 /* etna.otf */; };
+		859F43CF1C6CBC4400615C18 /* GameActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859F43CE1C6CBC4400615C18 /* GameActions.swift */; };
+		859F43D11C6CBCB300615C18 /* GameEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859F43D01C6CBCB300615C18 /* GameEvents.swift */; };
+		859F43D31C6CD29800615C18 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859F43D21C6CD29800615C18 /* GameLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +30,12 @@
 		850642E91C67DC0700A61813 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		850642EB1C67DC0700A61813 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		850642EE1C67DC0700A61813 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		850642F01C67DC0700A61813 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8541E9351C6B628A00E15F54 /* Deck.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Deck.sks; sourceTree = "<group>"; };
+		859F43CC1C6CBAAE00615C18 /* etna.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = etna.otf; sourceTree = "<group>"; };
+		859F43CE1C6CBC4400615C18 /* GameActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameActions.swift; sourceTree = "<group>"; };
+		859F43D01C6CBCB300615C18 /* GameEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEvents.swift; sourceTree = "<group>"; };
+		859F43D21C6CD29800615C18 /* GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		859F43D81C6CDDBB00615C18 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,13 +68,14 @@
 		850642DF1C67DC0700A61813 /* Choose Figure */ = {
 			isa = PBXGroup;
 			children = (
+				859F43D71C6CDA7100615C18 /* Configs */,
+				859F43D41C6CD2AA00615C18 /* Logic */,
 				8541E9341C6B616A00E15F54 /* Scenes */,
 				850642E01C67DC0700A61813 /* AppDelegate.swift */,
 				850642E61C67DC0700A61813 /* GameViewController.swift */,
 				850642E81C67DC0700A61813 /* Main.storyboard */,
 				850642EB1C67DC0700A61813 /* Assets.xcassets */,
 				850642ED1C67DC0700A61813 /* LaunchScreen.storyboard */,
-				850642F01C67DC0700A61813 /* Info.plist */,
 			);
 			path = "Choose Figure";
 			sourceTree = "<group>";
@@ -79,6 +88,25 @@
 				850642E41C67DC0700A61813 /* GameScene.swift */,
 			);
 			name = Scenes;
+			sourceTree = "<group>";
+		};
+		859F43D41C6CD2AA00615C18 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				859F43CE1C6CBC4400615C18 /* GameActions.swift */,
+				859F43D01C6CBCB300615C18 /* GameEvents.swift */,
+				859F43D21C6CD29800615C18 /* GameLogic.swift */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		859F43D71C6CDA7100615C18 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				859F43CC1C6CBAAE00615C18 /* etna.otf */,
+				859F43D81C6CDDBB00615C18 /* Info.plist */,
+			);
+			name = Configs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				850642E31C67DC0700A61813 /* GameScene.sks in Resources */,
+				859F43CD1C6CBAAE00615C18 /* etna.otf in Resources */,
 				850642EF1C67DC0700A61813 /* LaunchScreen.storyboard in Resources */,
 				850642EC1C67DC0700A61813 /* Assets.xcassets in Resources */,
 				8541E9361C6B628A00E15F54 /* Deck.sks in Resources */,
@@ -154,9 +183,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				859F43D31C6CD29800615C18 /* GameLogic.swift in Sources */,
 				850642E51C67DC0700A61813 /* GameScene.swift in Sources */,
 				850642E71C67DC0700A61813 /* GameViewController.swift in Sources */,
 				850642E11C67DC0700A61813 /* AppDelegate.swift in Sources */,
+				859F43CF1C6CBC4400615C18 /* GameActions.swift in Sources */,
+				859F43D11C6CBCB300615C18 /* GameEvents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

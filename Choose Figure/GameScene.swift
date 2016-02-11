@@ -62,6 +62,9 @@ class GameScene: SKScene {
         
         // configure the lebel label
         self.levelLabelNode?.text = String(level)
+        
+        let path = NSBundle.mainBundle().pathForResource("Images", ofType: "plist")
+        
     }
     
 }
