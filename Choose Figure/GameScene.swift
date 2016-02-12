@@ -18,6 +18,7 @@ class GameScene: SKScene {
     var levelLabelNode: SKLabelNode?
     var rightFigureNode: SKSpriteNode?
     var deckNodes: [SKSpriteNode] = []
+    var lives: [SKSpriteNode] = []
     
     
     // preparations
@@ -31,6 +32,9 @@ class GameScene: SKScene {
             if node.name == "figure" {
                 self.deckNodes.append(node as! SKSpriteNode)
             }
+            if node.name == "life" {
+                self.lives.append(node as! SKSpriteNode)
+            }
         }
         // configure the label
         self.levelLabelNode?.text = String(level)
@@ -42,6 +46,8 @@ class GameScene: SKScene {
         // Draw sprites
         drawDeck()
         drawRightFigure()
+        drawLives()
+
 
         
     }
@@ -63,6 +69,11 @@ extension GameScene {
         let name = logic?.rightFigureName
         self.rightFigureNode?.texture = SKTexture(imageNamed: name!)
     }
+    
+    func drawLives() {
+
+    }
+    
 }
 
 // MARK: - Event Delegation
@@ -77,6 +88,10 @@ extension GameScene: GameEvents {
     }
     
     func userDidWrongChoice() {
+        let index = (logic?.lives)! - 1
+        let lifeNode = lives[index]
+        let action = SKAction.fadeAlphaTo(0.2, duration: 0.1)
+        lifeNode.runAction(action)
         print("Fail!!! Lives: \(logic?.lives)")
     }
     
@@ -89,7 +104,14 @@ extension GameScene {
     }
     
     func moveToNextLevel() {
-        print("Next Level")
+        
+        let transition = SKTransition.crossFadeWithDuration(0)
+        
+        let nextLevelScene = GameScene(fileNamed:"GameScene")
+        nextLevelScene!.level = level + 1
+        nextLevelScene!.scaleMode = SKSceneScaleMode.AspectFill
+        print(nextLevelScene)
+        self.scene!.view?.presentScene(nextLevelScene!, transition: transition)
     }
 }
 
