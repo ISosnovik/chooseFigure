@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-let minNumberOfFigures = 4 // minimal number of figures to choose in level
+let minNumberOfFigures = 3 // minimal number of figures to choose in level
 let maxNumberOfFigures = 6 // maximal number of figures to choose in level
 let bestScoreKey = "BestScore"
 
@@ -18,10 +18,11 @@ class GameLogic {
     
     // Figure settings
     var chosenFigureIndex: Int?
-    var figureIndeces: [Int] = [] // array of indeces of figures
+    var deck: [Int] = [] // array of indeces of figures
     var availableNames: [String] = [] // array of names of figures available in this level
-    var numberOfFigures: Int? // number of figures required to choose
-    var chosenNumberOfFigures: Int? // number of chose figures
+    var numberOfFiguresToChoose: Int? // number of figures required to choose
+    var numberOfChosenFigures: Int = 0 // number of chose figures
+    var deckSize: Int? // number of figures in the deck
     
     // Score settings
     var bestScore: Int {
@@ -47,16 +48,16 @@ class GameLogic {
     }
     
     // Initializer
-    required init(delegate: GameEvents) {
+    required init(delegate: GameEvents, deckSize: Int) {
         self.delegate = delegate
-        
+        self.deckSize = deckSize
         // number of figures to choose
-        self.numberOfFigures = Int.random(minNumberOfFigures...maxNumberOfFigures)
+        self.numberOfFiguresToChoose = Int.random(minNumberOfFigures...maxNumberOfFigures)
         
         let level = delegate.level
         self.availableNames = figureNamesForLevel(level)
-        self.chosenFigureIndex = Int(arc4random_uniform(UInt32(availableNames.count)))
-        
+        self.chosenFigureIndex = Int.random(0...availableNames.count - 1)
+        self.deck = generateDeck()
     }
 }
 
@@ -81,10 +82,22 @@ extension GameLogic {
             return figureNamesForLevel(level - 1) + newImageName
         }
     }
+    
+    
+    private func generateDeck() -> [Int] {
+        let forbiddenValue = chosenFigureIndex!
+        var deck = Int.randoms(deckSize!, minNum: 0, maxNum: availableNames.count - 1, forbiddenValues: [forbiddenValue])
+        let chosenIndices = Int.uniqueRandoms(numberOfFiguresToChoose!, minNum: 0, maxNum: deckSize! - 1)
+        for index in chosenIndices {
+            deck[index] = chosenFigureIndex!
+        }
+        return deck
+    }
 }
 
 
 // MARK: Actions
+
 
 extension GameLogic: GameActions {
     

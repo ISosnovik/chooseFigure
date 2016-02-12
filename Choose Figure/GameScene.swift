@@ -23,7 +23,6 @@ class GameScene: SKScene {
     // preparations
     override func didMoveToView(view: SKView) {
         // configure logic
-        self.logic = GameLogic(delegate: self)        
         // connect nodes with scene
         self.levelLabelNode = childNodeWithName("level") as? SKLabelNode
         self.rightFigureNode = childNodeWithName("rightFigure") as? SKSpriteNode
@@ -34,6 +33,11 @@ class GameScene: SKScene {
                 self.deckNodes.append(node as! SKSpriteNode)
             }
         }
+        
+        self.logic = GameLogic(delegate: self, deckSize: deckNodes.count)
+        print("chosenIndex \(logic?.chosenFigureIndex)")
+        print("numberOfFiguresToChoose \(logic?.numberOfFiguresToChoose)")
+        print(logic?.deck)
         
         // configure the lebel label
         self.levelLabelNode?.text = String(level)
@@ -71,8 +75,8 @@ extension GameScene {
 extension GameScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
-            let position = touch.locationInNode(self)
-            let node = self.nodeAtPoint(position)
+//            let position = touch.locationInNode(self)
+//            let node = self.nodeAtPoint(position)
 
         }
     }

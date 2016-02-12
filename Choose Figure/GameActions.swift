@@ -15,6 +15,6 @@ protocol GameActions {
     
     func userDidChoice(index: Int)
     
-    init(delegate: GameEvents)
+    init(delegate: GameEvents, deckSize: Int)
     
 }
