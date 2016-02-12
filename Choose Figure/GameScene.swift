@@ -22,32 +22,53 @@ class GameScene: SKScene {
     
     // preparations
     override func didMoveToView(view: SKView) {
-        // configure logic
+
         // connect nodes with scene
         self.levelLabelNode = childNodeWithName("level") as? SKLabelNode
         self.rightFigureNode = childNodeWithName("rightFigure") as? SKSpriteNode
-        
         enumerateChildNodesWithName("//*") {
             node, stop in
             if node.name == "figure" {
                 self.deckNodes.append(node as! SKSpriteNode)
             }
         }
-        
+        // configure the label
+        self.levelLabelNode?.text = String(level)
+        // configure logic
         self.logic = GameLogic(delegate: self, deckSize: deckNodes.count)
         print("chosenIndex \(logic?.chosenFigureIndex)")
         print("numberOfFiguresToChoose \(logic?.numberOfFiguresToChoose)")
-        print(logic?.deck)
+        print("Deck: \(logic?.deck)")
         
-        // configure the lebel label
-        self.levelLabelNode?.text = String(level)
-        
+        // Draw sprites
+        drawDeck()
+        drawRightFigure()
+
         
     }
     
 }
-// MARK: - Event Delegation
 
+
+// MARK - Drawings
+extension GameScene {
+    
+    func drawDeck() {
+        for (index, node) in deckNodes.enumerate() {
+            let nameIndex = logic?.deck[index]
+            let name = logic?.availableNames[nameIndex!]
+            node.texture = SKTexture(imageNamed: name!)
+        }
+    }
+    
+    func drawRightFigure() {
+        let nameIndex = logic?.chosenFigureIndex
+        let name = (logic?.availableNames[nameIndex!])! + "Big"
+        self.rightFigureNode?.texture = SKTexture(imageNamed: name)
+    }
+}
+
+// MARK: - Event Delegation
 extension GameScene: GameEvents {
     
     func userDidRightChoice() {
@@ -71,7 +92,6 @@ extension GameScene {
 }
 
 // MARK: - Touches
-
 extension GameScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
