@@ -12,8 +12,12 @@ protocol GameActions {
     
     var score: Int { get }
     var bestScore: Int { get }
+    var lives: Int { get }
     
-    func userDidChoice(index: Int)
+    var deck: [String] { get }
+    var rightFigureName: String? { get }
+    
+    func userChoose(index: Int)
     
     init(delegate: GameEvents, deckSize: Int)
     

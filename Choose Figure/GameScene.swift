@@ -13,7 +13,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     var level: Int = 1
-    var logic: GameLogic?
+    var logic: GameActions?
         
     var levelLabelNode: SKLabelNode?
     var rightFigureNode: SKSpriteNode?
@@ -36,8 +36,7 @@ class GameScene: SKScene {
         self.levelLabelNode?.text = String(level)
         // configure logic
         self.logic = GameLogic(delegate: self, deckSize: deckNodes.count)
-        print("chosenIndex \(logic?.chosenFigureIndex)")
-        print("numberOfFiguresToChoose \(logic?.numberOfFiguresToChoose)")
+        
         print("Deck: \(logic?.deck)")
         
         // Draw sprites
@@ -55,27 +54,30 @@ extension GameScene {
     
     func drawDeck() {
         for (index, node) in deckNodes.enumerate() {
-            let nameIndex = logic?.deck[index]
-            let name = logic?.availableNames[nameIndex!]
+            let name = logic?.deck[index]
             node.texture = SKTexture(imageNamed: name!)
         }
     }
     
     func drawRightFigure() {
-        let nameIndex = logic?.chosenFigureIndex
-        let name = (logic?.availableNames[nameIndex!])! + "Big"
-        self.rightFigureNode?.texture = SKTexture(imageNamed: name)
+        let name = logic?.rightFigureName
+        self.rightFigureNode?.texture = SKTexture(imageNamed: name!)
     }
 }
 
 // MARK: - Event Delegation
 extension GameScene: GameEvents {
     
-    func userDidRightChoice() {
-        
+    func userDidRightChoice(index: Int) {
+        let node = deckNodes[index]
+        // TODO: add action        
+        // TODO: play sound
+        // TODO: maybe splash
+        print("Cool!!!!")
     }
+    
     func userDidWrongChoice() {
-        
+        print("Fail!!! Lives: \(logic?.lives)")
     }
     
 }
@@ -83,21 +85,26 @@ extension GameScene: GameEvents {
 extension GameScene {
     
     func gameOver() {
-        
+        print("Game Over!!!")
     }
     
     func moveToNextLevel() {
-        
+        print("Next Level")
     }
 }
 
 // MARK: - Touches
 extension GameScene {
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
-//            let position = touch.locationInNode(self)
-//            let node = self.nodeAtPoint(position)
-
+            let position = touch.locationInNode(self)
+            let node = self.nodeAtPoint(position)
+            if node.name == "figure" {
+                let figure = node as? SKSpriteNode
+                let index = deckNodes.indexOf(figure!)
+                self.logic?.userChoose(index!)
+            }
         }
     }
 }

@@ -16,15 +16,10 @@ class GameLogic {
     // Delegate
     var delegate: GameEvents?
     
-    // Figure settings
-    var chosenFigureIndex: Int?
-    var deck: [Int] = [] // array of indeces of figures
-    var availableNames: [String] = [] // array of names of figures available in this level
-    var numberOfFiguresToChoose: Int? // number of figures required to choose
-    var numberOfChosenFigures: Int = 0 // number of chose figures
-    var deckSize: Int? // number of figures in the deck
-    
-    // Score settings
+    // Protocol properties
+    var deck: [String]  = []
+    var rightFigureName: String?
+    var lives: Int = 3 // number of lifes user has
     var bestScore: Int {
         get {
             return NSUserDefaults.standardUserDefaults().integerForKey(bestScoreKey) ?? 0
@@ -34,7 +29,6 @@ class GameLogic {
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
-    
     var score: Int {
         get {
             return self.delegate?.level ?? 1 - 1
@@ -47,6 +41,15 @@ class GameLogic {
         }
     }
     
+    // Class properties
+    // Figure settings
+    var rightFigureIndex: Int?
+    var deckOfIndices: [Int] = [] // array of indeces of figures
+    var availableNames: [String] = [] // array of names of figures available in this level
+    var numberOfFiguresToChoose: Int? // number of figures required to choose in this level
+    var numberOfChosenFigures: Int = 0
+    var deckSize: Int?
+
     // Initializer
     required init(delegate: GameEvents, deckSize: Int) {
         self.delegate = delegate
@@ -56,14 +59,17 @@ class GameLogic {
         
         let level = delegate.level
         self.availableNames = figureNamesForLevel(level)
-        self.chosenFigureIndex = Int.random(0...availableNames.count - 1)
-        self.deck = generateDeck()
+        self.rightFigureIndex = Int.random(0...availableNames.count - 1)
+        self.rightFigureName = availableNames[rightFigureIndex!]
+        self.deckOfIndices = generateDeckOfIndices()
+        self.deck = self.deckOfIndices.map({ index in
+            availableNames[index]
+        })
     }
 }
 
 
 // MARK: - Initial Setups
-
 extension GameLogic {
     
     // configuration of levels
@@ -83,13 +89,12 @@ extension GameLogic {
         }
     }
     
-    
-    private func generateDeck() -> [Int] {
-        let forbiddenValue = chosenFigureIndex!
+    private func generateDeckOfIndices() -> [Int] {
+        let forbiddenValue = rightFigureIndex!
         var deck = Int.randoms(deckSize!, minNum: 0, maxNum: availableNames.count - 1, forbiddenValues: [forbiddenValue])
         let chosenIndices = Int.uniqueRandoms(numberOfFiguresToChoose!, minNum: 0, maxNum: deckSize! - 1)
         for index in chosenIndices {
-            deck[index] = chosenFigureIndex!
+            deck[index] = rightFigureIndex!
         }
         return deck
     }
@@ -101,9 +106,26 @@ extension GameLogic {
 
 extension GameLogic: GameActions {
     
-    func userDidChoice(index: Int) {
+    func userChoose(index: Int) {
+        let indexOfFigure = deckOfIndices[index]
         
+        if indexOfFigure == rightFigureIndex! {
+            // Right figure
+            self.delegate?.userDidRightChoice(index)
+            self.numberOfChosenFigures += 1
+            if numberOfChosenFigures == numberOfFiguresToChoose {
+                self.delegate?.moveToNextLevel()
+            }
+        } else {
+            // Wrong figure
+            self.delegate?.userDidWrongChoice()
+            self.lives -= 1
+            if lives == 0 {
+                self.delegate?.gameOver()
+            }
+        }
     }
+    
 }
 
 

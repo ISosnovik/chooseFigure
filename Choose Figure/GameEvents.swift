@@ -12,7 +12,7 @@ protocol GameEvents {
     
     var level: Int { get set }
     
-    func userDidRightChoice()
+    func userDidRightChoice(index: Int)
     func userDidWrongChoice()
     
     func gameOver()
