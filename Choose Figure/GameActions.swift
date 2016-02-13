@@ -12,7 +12,6 @@ protocol GameActions {
     
     var score: Int { get }
     var bestScore: Int { get }
-    var lives: Int { get }
     
     var deck: [String] { get }
     var rightFigureName: String? { get }

@@ -19,7 +19,6 @@ class GameLogic {
     // Protocol properties
     var deck: [String]  = []
     var rightFigureName: String?
-    var lives: Int = 3 // number of lifes user has
     var bestScore: Int {
         get {
             return NSUserDefaults.standardUserDefaults().integerForKey(bestScoreKey) ?? 0
@@ -43,12 +42,12 @@ class GameLogic {
     
     // Class properties
     // Figure settings
-    var rightFigureIndex: Int?
     var deckOfIndices: [Int] = [] // array of indeces of figures
     var availableNames: [String] = [] // array of names of figures available in this level
     var numberOfFiguresToChoose: Int? // number of figures required to choose in this level
-    var numberOfChosenFigures: Int = 0
     var deckSize: Int?
+    var rightFigureIndex: Int?
+    var figuresToChoose: [Int] = []
 
     // Initializer
     required init(delegate: GameEvents, deckSize: Int) {
@@ -93,6 +92,7 @@ extension GameLogic {
         let forbiddenValue = rightFigureIndex!
         var deck = Int.randoms(deckSize!, minNum: 0, maxNum: availableNames.count - 1, forbiddenValues: [forbiddenValue])
         let chosenIndices = Int.uniqueRandoms(numberOfFiguresToChoose!, minNum: 0, maxNum: deckSize! - 1)
+        self.figuresToChoose = chosenIndices
         for index in chosenIndices {
             deck[index] = rightFigureIndex!
         }
@@ -107,20 +107,20 @@ extension GameLogic {
 extension GameLogic: GameActions {
     
     func userChoose(index: Int) {
-        let indexOfFigure = deckOfIndices[index]
-        
-        if indexOfFigure == rightFigureIndex! {
-            // Right figure
-            self.delegate?.userDidRightChoice(index)
-            self.numberOfChosenFigures += 1
-            if numberOfChosenFigures == numberOfFiguresToChoose {
-                self.delegate?.moveToNextLevel()
+        let figureIndex = deckOfIndices[index]
+        if figureIndex == rightFigureIndex {
+            if let indexInArray = figuresToChoose.indexOf(index){
+                self.delegate?.userDidRightChoice(index)
+                self.figuresToChoose.removeAtIndex(indexInArray)
+                if figuresToChoose.count == 0 {
+                    self.delegate?.moveToNextLevel()
+                }
             }
         } else {
             // Wrong figure
             self.delegate?.userDidWrongChoice()
-            self.lives -= 1
-            if lives == 0 {
+            self.delegate?.lives -= 1
+            if self.delegate?.lives == 0 {
                 self.delegate?.gameOver()
             }
         }

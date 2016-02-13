@@ -18,7 +18,8 @@ class GameScene: SKScene {
     var levelLabelNode: SKLabelNode?
     var rightFigureNode: SKSpriteNode?
     var deckNodes: [SKSpriteNode] = []
-    var lives: [SKSpriteNode] = []
+    var lifeNodes: [SKSpriteNode] = []
+    var lives: Int = 3
     
     
     // preparations
@@ -33,23 +34,17 @@ class GameScene: SKScene {
                 self.deckNodes.append(node as! SKSpriteNode)
             }
             if node.name == "life" {
-                self.lives.append(node as! SKSpriteNode)
+                self.lifeNodes.append(node as! SKSpriteNode)
             }
         }
         // configure the label
         self.levelLabelNode?.text = String(level)
         // configure logic
         self.logic = GameLogic(delegate: self, deckSize: deckNodes.count)
-        
-        print("Deck: \(logic?.deck)")
-        
         // Draw sprites
         drawDeck()
         drawRightFigure()
         drawLives()
-
-
-        
     }
     
 }
@@ -71,7 +66,12 @@ extension GameScene {
     }
     
     func drawLives() {
-
+        if lives < 3 {
+            for index in lives...2 {
+                let node = lifeNodes[index]
+                node.alpha = 0.2
+            }
+        }
     }
     
 }
@@ -88,11 +88,11 @@ extension GameScene: GameEvents {
     }
     
     func userDidWrongChoice() {
-        let index = (logic?.lives)! - 1
-        let lifeNode = lives[index]
+        let index = lives - 1
+        let lifeNode = lifeNodes[index]
         let action = SKAction.fadeAlphaTo(0.2, duration: 0.1)
         lifeNode.runAction(action)
-        print("Fail!!! Lives: \(logic?.lives)")
+        print("Fail!!! Lives: \(lives)")
     }
     
 }
@@ -109,8 +109,8 @@ extension GameScene {
         
         let nextLevelScene = GameScene(fileNamed:"GameScene")
         nextLevelScene!.level = level + 1
+        nextLevelScene!.lives = lives
         nextLevelScene!.scaleMode = SKSceneScaleMode.AspectFill
-        print(nextLevelScene)
         self.scene!.view?.presentScene(nextLevelScene!, transition: transition)
     }
 }
