@@ -12,7 +12,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    var level: Int = 1
+    var level: Int = 190
     var logic: GameActions?
         
     var levelLabelNode: SKLabelNode?
