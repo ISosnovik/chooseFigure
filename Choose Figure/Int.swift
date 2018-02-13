@@ -9,20 +9,23 @@
 import Foundation
 
 extension Int{
-    // generate random value from the interval
-    static func random(range: Range<Int> ) -> Int
-    {
-        var offset = 0
-        if range.startIndex < 0   // allow negative ranges
-        {
-            offset = abs(range.startIndex)
-        }
-        
-        let mini = UInt32(range.startIndex + offset)
-        let maxi = UInt32(range.endIndex   + offset)
-        return Int(mini + arc4random_uniform(maxi - mini)) - offset
-    }
+//    // generate random value from the interval
+//    static func random(range: Range<Int> ) -> Int
+//    {
+//        var offset = 0
+//        if range.lowerBound < 0   // allow negative ranges
+//        {
+//            offset = abs(range.lowerBound)
+//        }
+//
+//        let mini = UInt32(range.lowerBound + offset)
+//        let maxi = UInt32(range.upperBound + offset)
+//        return Int(mini + arc4random_uniform(maxi - mini)) - offset
+//    }
     
+    static func random(minNum: Int, maxNum: Int) -> Int {
+        return Int(arc4random_uniform(UInt32(maxNum - minNum)) + UInt32(minNum))
+    }
     // generate array with unique random values
     static func uniqueRandoms(numberOfRandoms: Int, minNum: Int, maxNum: Int) -> [Int] {
         
@@ -32,7 +35,7 @@ extension Int{
         }
         
         while randoms.count < numberOfRandoms {
-            let randomNumber = Int.random(minNum...maxNum)
+            let randomNumber = Int.random(minNum:minNum, maxNum:maxNum)
             if !randoms.contains(randomNumber) {
                 randoms.append(randomNumber)
             }
@@ -57,7 +60,7 @@ extension Int{
         var randoms: [Int] = []
         
         while randoms.count < numberOfRandoms {
-            let randomNumber = Int.random(minNum...maxNum)
+            let randomNumber = Int.random(minNum:minNum, maxNum: maxNum)
             if !forbiddenValues.contains(randomNumber) {
                 randoms.append(randomNumber)
             }

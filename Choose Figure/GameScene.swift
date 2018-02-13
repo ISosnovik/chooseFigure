@@ -23,12 +23,12 @@ class GameScene: SKScene {
     
     
     // preparations
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
 
         // connect nodes with scene
-        self.levelLabelNode = childNodeWithName("level") as? SKLabelNode
-        self.rightFigureNode = childNodeWithName("rightFigure") as? SKSpriteNode
-        enumerateChildNodesWithName("//*") {
+        self.levelLabelNode = childNode(withName: "level") as? SKLabelNode
+        self.rightFigureNode = childNode(withName: "rightFigure") as? SKSpriteNode
+        enumerateChildNodes(withName: "//*") {
             node, stop in
             if node.name == "figure" {
                 self.deckNodes.append(node as! SKSpriteNode)
@@ -54,7 +54,7 @@ class GameScene: SKScene {
 extension GameScene {
     
     func drawDeck() {
-        for (index, node) in deckNodes.enumerate() {
+        for (index, node) in deckNodes.enumerated() {
             let name = logic?.deck[index]
             node.texture = SKTexture(imageNamed: name!)
         }
@@ -80,7 +80,7 @@ extension GameScene {
 extension GameScene: GameEvents {
     
     func userDidRightChoice(index: Int) {
-        let node = deckNodes[index]
+        _ = deckNodes[index]
         // TODO: add action        
         // TODO: play sound
         // TODO: maybe splash
@@ -90,8 +90,8 @@ extension GameScene: GameEvents {
     func userDidWrongChoice() {
         let index = lives - 1
         let lifeNode = lifeNodes[index]
-        let action = SKAction.fadeAlphaTo(0.2, duration: 0.1)
-        lifeNode.runAction(action)
+        let action = SKAction.fadeAlpha(to: 0.2, duration: 0.1)
+        lifeNode.run(action)
         print("Fail!!! Lives: \(lives)")
     }
     
@@ -105,12 +105,12 @@ extension GameScene {
     
     func moveToNextLevel() {
         
-        let transition = SKTransition.crossFadeWithDuration(0)
+        let transition = SKTransition.crossFade(withDuration: 0)
         
         let nextLevelScene = GameScene(fileNamed:"GameScene")
         nextLevelScene!.level = level + 1
         nextLevelScene!.lives = lives
-        nextLevelScene!.scaleMode = SKSceneScaleMode.AspectFill
+        nextLevelScene!.scaleMode = SKSceneScaleMode.aspectFill
         self.scene!.view?.presentScene(nextLevelScene!, transition: transition)
     }
 }
@@ -118,14 +118,14 @@ extension GameScene {
 // MARK: - Touches
 extension GameScene {
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let position = touch.locationInNode(self)
-            let node = self.nodeAtPoint(position)
+            let position = touch.location(in: self)
+            let node = self.atPoint(position)
             if node.name == "figure" {
                 let figure = node as? SKSpriteNode
-                let index = deckNodes.indexOf(figure!)
-                self.logic?.userChoose(index!)
+                let index = deckNodes.index(of: figure!)
+                self.logic?.userChoose(index: index!)
             }
         }
     }
