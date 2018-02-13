@@ -21,7 +21,7 @@ class GameLogic {
     var rightFigureName: String?
     var bestScore: Int {
         get {
-            return UserDefaults.standard.integer(forKey: bestScoreKey) ?? 0
+            return UserDefaults.standard.integer(forKey: bestScoreKey)
         }
         set {
             UserDefaults.standard.set(newValue, forKey: bestScoreKey)
