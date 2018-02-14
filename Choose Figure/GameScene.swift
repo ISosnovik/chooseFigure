@@ -81,7 +81,7 @@ extension GameScene: GameEvents {
     func userDidRightChoice(index: Int) {
         _ = deckNodes[index]
 //        var audioPlayer:AVAudioPlayer!
-        let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_jump-small", ofType: "mp3")!)
+        let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_coin", ofType: "wav")!)
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
             
@@ -95,13 +95,13 @@ extension GameScene: GameEvents {
     }
     
     func userDidWrongChoice() {
-        if lives > 1 {
+        if lives >= 1 {
             let index = lives - 1
             let lifeNode = lifeNodes[index]
             let action = SKAction.fadeAlpha(to: 0.2, duration: 0.1)
             lifeNode.run(action)
 
-            let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_mariodie", ofType: "mp3")!)
+            let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_bump", ofType: "wav")!)
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
                 
@@ -154,7 +154,7 @@ extension GameScene {
             // Fallback on earlier versions
         }
         nextLevelScene!.level = level + 1
-        let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_stage_clear", ofType: "mp3")!)
+        let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_stage_clear", ofType: "wav")!)
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
             
