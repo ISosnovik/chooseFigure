@@ -7,11 +7,14 @@
 //
 
 import SpriteKit
-
-
+import AVFoundation
 
 class GameScene: SKScene {
-    
+    var skyblue: UIColor = UIColor(red:0.28, green:0.72, blue:0.91, alpha:1.0)
+    var brightRed: UIColor = UIColor(red:0.91, green:0.07, blue:0.31, alpha:1.0)
+    var parrotGreen: UIColor = UIColor(red:0.21, green:0.96, blue:0.33, alpha:1.0)
+    var yellow: UIColor = UIColor(red:0.91, green:0.07, blue:0.31, alpha:1.0)
+    var audioPlayer:AVAudioPlayer!
     var level: Int = 1
     var logic: GameActions?
         
@@ -78,21 +81,46 @@ extension GameScene {
 
 // MARK: - Event Delegation
 extension GameScene: GameEvents {
+    func gameSpeak(gametext: String) {
+        let utterance = AVSpeechUtterance(string: gametext)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+        
+        let synth = AVSpeechSynthesizer()
+        synth.speak(utterance)
+        print(gametext)
+    }
+    
+    func gameSound(sound: String) {
+        let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: sound, ofType: "wav")!)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
+            
+            // check if audioPlayer is prepared to play audio
+            if audioPlayer.prepareToPlay() {
+                audioPlayer.play()
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     
     func userDidRightChoice(index: Int) {
         _ = deckNodes[index]
-        // TODO: add action        
-        // TODO: play sound
-        // TODO: maybe splash
-        print("Cool!!!!")
+        gameSound(sound: "smb_coin")
     }
     
     func userDidWrongChoice() {
-        let index = lives - 1
-        let lifeNode = lifeNodes[index]
-        let action = SKAction.fadeAlpha(to: 0.2, duration: 0.1)
-        lifeNode.run(action)
-        print("Fail!!! Lives: \(lives)")
+        if lives >= 1 {
+            let index = lives - 1
+            let lifeNode = lifeNodes[index]
+            let action = SKAction.fadeAlpha(to: 0.2, duration: 0.1)
+            lifeNode.run(action)
+            gameSound(sound: "smb_bump")
+            gameSpeak(gametext: "Oops, Wrong move!")
+        } else {
+            gameSpeak(gametext: "Sorry, out of lives!")
+        }
     }
     
 }
@@ -100,6 +128,8 @@ extension GameScene: GameEvents {
 extension GameScene {
     
     func gameOver() {
+        gameSound(sound: "smb_gameover")
+        gameSpeak(gametext: "Game Over!!!")
         print("Game Over!!!")
     }
     
@@ -109,6 +139,25 @@ extension GameScene {
         
         let nextLevelScene = GameScene(fileNamed:"GameScene")
         nextLevelScene!.level = level + 1
+        if #available(iOS 10.0, *) {
+            if (nextLevelScene!.level % 2 == 0) {
+                nextLevelScene!.backgroundColor = skyblue
+                print("even")
+            } else if (nextLevelScene!.level % 1 == 0 && nextLevelScene!.level % nextLevelScene!.level == 0) {
+                nextLevelScene!.backgroundColor = yellow
+                print("prime")
+            } else {
+                nextLevelScene!.backgroundColor = brightRed
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        gameSound(sound: "smb_1-up")
+        let levelUpString = "Congrats! You moved to new level" +
+            String(nextLevelScene!.level) + " and still have " +
+            String(self.lives) + " lives left"
+        gameSpeak(gametext: levelUpString)
+
         nextLevelScene!.lives = lives
         nextLevelScene!.scaleMode = SKSceneScaleMode.aspectFill
         self.scene!.view?.presentScene(nextLevelScene!, transition: transition)
@@ -130,16 +179,3 @@ extension GameScene {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
