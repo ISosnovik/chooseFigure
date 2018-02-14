@@ -15,4 +15,6 @@ protocol GameEvents {
     func userDidWrongChoice()
     func gameOver()
     func moveToNextLevel()
+    func gameSpeak(gametext: String)
+    func gameSound(sound: String)
 }

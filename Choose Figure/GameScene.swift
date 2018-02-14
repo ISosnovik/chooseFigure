@@ -77,11 +77,17 @@ extension GameScene {
 
 // MARK: - Event Delegation
 extension GameScene: GameEvents {
+    func gameSpeak(gametext: String) {
+        let utterance = AVSpeechUtterance(string: gametext)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+        
+        let synth = AVSpeechSynthesizer()
+        synth.speak(utterance)
+        print(gametext)
+    }
     
-    func userDidRightChoice(index: Int) {
-        _ = deckNodes[index]
-//        var audioPlayer:AVAudioPlayer!
-        let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_coin", ofType: "wav")!)
+    func gameSound(sound: String) {
+        let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: sound, ofType: "wav")!)
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
             
@@ -90,8 +96,14 @@ extension GameScene: GameEvents {
                 audioPlayer.play()
             }
         } catch {
-            
+            print(error)
         }
+    }
+    
+    
+    func userDidRightChoice(index: Int) {
+        _ = deckNodes[index]
+        gameSound(sound: "smb_coin")
     }
     
     func userDidWrongChoice() {
@@ -100,33 +112,10 @@ extension GameScene: GameEvents {
             let lifeNode = lifeNodes[index]
             let action = SKAction.fadeAlpha(to: 0.2, duration: 0.1)
             lifeNode.run(action)
-
-            let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_bump", ofType: "wav")!)
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
-                
-                // check if audioPlayer is prepared to play audio
-                if audioPlayer.prepareToPlay() {
-                    audioPlayer.play()
-                }
-            } catch {
-                
-            }
-            let string = "Oops, Wrong move!"
-            let utterance = AVSpeechUtterance(string: string)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-
-            let synth = AVSpeechSynthesizer()
-            synth.speak(utterance)
-            print(string)
+            gameSound(sound: "smb_bump")
+            gameSpeak(gametext: "Oops, Wrong move!")
         } else {
-            let string = "Sorry, out of lives!"
-            let utterance = AVSpeechUtterance(string: string)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-            
-            let synth = AVSpeechSynthesizer()
-            synth.speak(utterance)
-            print(string)
+            gameSpeak(gametext: "Sorry, out of lives!")
         }
     }
     
@@ -154,28 +143,12 @@ extension GameScene {
             // Fallback on earlier versions
         }
         nextLevelScene!.level = level + 1
-        let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_stage_clear", ofType: "wav")!)
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
-            
-            // check if audioPlayer is prepared to play audio
-            if audioPlayer.prepareToPlay() {
-                audioPlayer.play()
-            }
-        } catch {
-            
-        }
-
-        let string = "Congrats! You moved to new level" +
+        gameSound(sound: "smb_stage_clear")
+        let levelUpString = "Congrats! You moved to new level" +
             String(nextLevelScene!.level) + " and still have " +
             String(self.lives) + " lives left"
-        let utterance = AVSpeechUtterance(string: string)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-        
-        let synth = AVSpeechSynthesizer()
-        synth.speak(utterance)
-        print(string)
-        
+        gameSpeak(gametext: levelUpString)
+
         nextLevelScene!.lives = lives
         nextLevelScene!.scaleMode = SKSceneScaleMode.aspectFill
         self.scene!.view?.presentScene(nextLevelScene!, transition: transition)
