@@ -54,11 +54,16 @@ class GameLogic {
         self.delegate = delegate
         self.deckSize = deckSize
         // number of figures to choose
-        self.numberOfFiguresToChoose = Int.random(minNum:minNumberOfFigures, maxNum:maxNumberOfFigures)
-
+        self.numberOfFiguresToChoose = Int.random(
+            minNum: minNumberOfFigures,
+            maxNum:maxNumberOfFigures
+        )
         let level = delegate.level
         self.availableNames = figureNamesForLevel(level: level)
-        self.rightFigureIndex = Int.random(minNum:0, maxNum: availableNames.count - 1)
+        self.rightFigureIndex = Int.random(
+            minNum: 0,
+            maxNum: availableNames.count - 1
+        )
         self.rightFigureName = availableNames[rightFigureIndex!]
         self.deckOfIndices = generateDeckOfIndices()
         self.deck = self.deckOfIndices.map({ index in
@@ -90,8 +95,16 @@ extension GameLogic {
 
     private func generateDeckOfIndices() -> [Int] {
         let forbiddenValue = rightFigureIndex!
-        var deck = Int.randoms(numberOfRandoms: deckSize!, minNum: 0, maxNum: availableNames.count - 1, forbiddenValues: [forbiddenValue])
-        let chosenIndices = Int.uniqueRandoms(numberOfRandoms: numberOfFiguresToChoose!, minNum: 0, maxNum: deckSize! - 1)
+        var deck = Int.randoms(
+            numberOfRandoms: deckSize!,
+            minNum: 0, maxNum: availableNames.count - 1,
+            forbiddenValues: [forbiddenValue]
+        )
+        let chosenIndices = Int.uniqueRandoms(
+            numberOfRandoms: numberOfFiguresToChoose!,
+            minNum: 0,
+            maxNum: deckSize! - 1
+        )
         self.figuresToChoose = chosenIndices
         for index in chosenIndices {
             deck[index] = rightFigureIndex!

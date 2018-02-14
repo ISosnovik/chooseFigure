@@ -10,7 +10,6 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,6 +27,10 @@ class GameViewController: UIViewController {
             
             skView.presentScene(scene)
         }
+    }
+    
+    override open var shouldAutorotate: Bool {
+        return true
     }
 
 //    override func shouldAutorotate() -> Bool {
