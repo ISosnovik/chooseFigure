@@ -85,7 +85,7 @@ extension GameScene: GameEvents {
         // TODO: maybe splash
         let string = "Good job!"
         let utterance = AVSpeechUtterance(string: string)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
         
         let synth = AVSpeechSynthesizer()
         synth.speak(utterance)
@@ -100,15 +100,15 @@ extension GameScene: GameEvents {
             lifeNode.run(action)
             let string = "Oops, Wrong move!"
             let utterance = AVSpeechUtterance(string: string)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
             
             let synth = AVSpeechSynthesizer()
             synth.speak(utterance)
             print(string)
         } else {
-            let string = "Sorry, out of lives!"
+            let string = "Sorry, out of lives it!"
             let utterance = AVSpeechUtterance(string: string)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
             
             let synth = AVSpeechSynthesizer()
             synth.speak(utterance)
@@ -130,6 +130,16 @@ extension GameScene {
         
         let nextLevelScene = GameScene(fileNamed:"GameScene")
         nextLevelScene!.level = level + 1
+        let string = "Congrats! You moved to new level" +
+            String(nextLevelScene!.level) + " and still have " +
+            String(self.lives) + " lives left"
+        let utterance = AVSpeechUtterance(string: string)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+        
+        let synth = AVSpeechSynthesizer()
+        synth.speak(utterance)
+        print(string)
+        
         nextLevelScene!.lives = lives
         nextLevelScene!.scaleMode = SKSceneScaleMode.aspectFill
         self.scene!.view?.presentScene(nextLevelScene!, transition: transition)
