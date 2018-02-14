@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4657FE432034671000F8BF9B /* smb_gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4657FE402034671000F8BF9B /* smb_gameover.mp3 */; };
+		4657FE442034671000F8BF9B /* smb_mariodie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4657FE412034671000F8BF9B /* smb_mariodie.mp3 */; };
+		4657FE452034671000F8BF9B /* smb_jump-small.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4657FE422034671000F8BF9B /* smb_jump-small.mp3 */; };
 		850642E11C67DC0700A61813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850642E01C67DC0700A61813 /* AppDelegate.swift */; };
 		850642E31C67DC0700A61813 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 850642E21C67DC0700A61813 /* GameScene.sks */; };
 		850642E51C67DC0700A61813 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850642E41C67DC0700A61813 /* GameScene.swift */; };
@@ -24,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4657FE402034671000F8BF9B /* smb_gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smb_gameover.mp3; sourceTree = "<group>"; };
+		4657FE412034671000F8BF9B /* smb_mariodie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smb_mariodie.mp3; sourceTree = "<group>"; };
+		4657FE422034671000F8BF9B /* smb_jump-small.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "smb_jump-small.mp3"; sourceTree = "<group>"; };
 		850642DD1C67DC0700A61813 /* Choose Figure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Choose Figure.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		850642E01C67DC0700A61813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		850642E21C67DC0700A61813 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -53,6 +59,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4657FE2F20345E1000F8BF9B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				4657FE402034671000F8BF9B /* smb_gameover.mp3 */,
+				4657FE422034671000F8BF9B /* smb_jump-small.mp3 */,
+				4657FE412034671000F8BF9B /* smb_mariodie.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		850642D41C67DC0700A61813 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +88,7 @@
 		850642DF1C67DC0700A61813 /* Choose Figure */ = {
 			isa = PBXGroup;
 			children = (
+				4657FE2F20345E1000F8BF9B /* Sounds */,
 				859F43DA1C6CFFA400615C18 /* Int.swift */,
 				859F43D71C6CDA7100615C18 /* Configs */,
 				859F43D41C6CD2AA00615C18 /* Logic */,
@@ -177,8 +194,11 @@
 				850642E31C67DC0700A61813 /* GameScene.sks in Resources */,
 				859F43CD1C6CBAAE00615C18 /* etna.otf in Resources */,
 				850642EF1C67DC0700A61813 /* LaunchScreen.storyboard in Resources */,
+				4657FE452034671000F8BF9B /* smb_jump-small.mp3 in Resources */,
+				4657FE442034671000F8BF9B /* smb_mariodie.mp3 in Resources */,
 				850642EC1C67DC0700A61813 /* Assets.xcassets in Resources */,
 				8541E9361C6B628A00E15F54 /* Deck.sks in Resources */,
+				4657FE432034671000F8BF9B /* smb_gameover.mp3 in Resources */,
 				8531BC291C6E68C000C378E1 /* Lives.sks in Resources */,
 				850642EA1C67DC0700A61813 /* Main.storyboard in Resources */,
 			);

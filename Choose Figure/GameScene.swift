@@ -83,13 +83,24 @@ extension GameScene: GameEvents {
         // TODO: add action        
         // TODO: play sound
         // TODO: maybe splash
-        let string = "Good job!"
-        let utterance = AVSpeechUtterance(string: string)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-        
-        let synth = AVSpeechSynthesizer()
-        synth.speak(utterance)
-        print(string)
+//        let string = "Good job!"
+//        let utterance = AVSpeechUtterance(string: string)
+//        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+//        
+//        let synth = AVSpeechSynthesizer()
+//        synth.speak(utterance)
+//        print(string)
+        var correctStepSound: AVAudioPlayer = AVAudioPlayer()
+
+        let path = Bundle.main.path(forResource: "smb_jump-small", ofType: ".mp3")
+        let url = URL(fileURLWithPath: path!)
+        do {
+            correctStepSound = try AVAudioPlayer(contentsOf: url)
+            correctStepSound.play()
+        } catch {
+            print("I am here")
+            print(error)
+        }
     }
     
     func userDidWrongChoice() {
