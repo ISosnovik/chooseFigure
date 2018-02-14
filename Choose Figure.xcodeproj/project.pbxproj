@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		464A0EA620347C8700AE3001 /* smb_gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 464A0EA320347C8600AE3001 /* smb_gameover.mp3 */; };
-		464A0EA720347C8700AE3001 /* smb_mariodie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 464A0EA420347C8600AE3001 /* smb_mariodie.mp3 */; };
-		464A0EA820347C8700AE3001 /* smb_jump-small.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 464A0EA520347C8600AE3001 /* smb_jump-small.mp3 */; };
 		464A0EAA20347EB600AE3001 /* smb_stage_clear.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 464A0EA920347EB600AE3001 /* smb_stage_clear.mp3 */; };
 		464A0EBF2034813600AE3001 /* smb_pipe.wav in Resources */ = {isa = PBXBuildFile; fileRef = 464A0EAB2034813300AE3001 /* smb_pipe.wav */; };
 		464A0EC02034813600AE3001 /* smb_stage_clear.wav in Resources */ = {isa = PBXBuildFile; fileRef = 464A0EAC2034813300AE3001 /* smb_stage_clear.wav */; };
@@ -51,9 +48,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		464A0EA320347C8600AE3001 /* smb_gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smb_gameover.mp3; sourceTree = "<group>"; };
-		464A0EA420347C8600AE3001 /* smb_mariodie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smb_mariodie.mp3; sourceTree = "<group>"; };
-		464A0EA520347C8600AE3001 /* smb_jump-small.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "smb_jump-small.mp3"; sourceTree = "<group>"; };
 		464A0EA920347EB600AE3001 /* smb_stage_clear.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smb_stage_clear.mp3; sourceTree = "<group>"; };
 		464A0EAB2034813300AE3001 /* smb_pipe.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = smb_pipe.wav; sourceTree = "<group>"; };
 		464A0EAC2034813300AE3001 /* smb_stage_clear.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = smb_stage_clear.wav; sourceTree = "<group>"; };
@@ -157,9 +151,6 @@
 		850642DF1C67DC0700A61813 /* Choose Figure */ = {
 			isa = PBXGroup;
 			children = (
-				464A0EA320347C8600AE3001 /* smb_gameover.mp3 */,
-				464A0EA520347C8600AE3001 /* smb_jump-small.mp3 */,
-				464A0EA420347C8600AE3001 /* smb_mariodie.mp3 */,
 				4657FE2F20345E1000F8BF9B /* Sounds */,
 				859F43DA1C6CFFA400615C18 /* Int.swift */,
 				859F43D71C6CDA7100615C18 /* Configs */,
@@ -264,7 +255,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				850642E31C67DC0700A61813 /* GameScene.sks in Resources */,
-				464A0EA820347C8700AE3001 /* smb_jump-small.mp3 in Resources */,
 				464A0EC22034813600AE3001 /* smb_coin.wav in Resources */,
 				464A0ECA2034813600AE3001 /* smb_bowserfire.wav in Resources */,
 				464A0EC12034813600AE3001 /* smb_stomp.wav in Resources */,
@@ -291,9 +281,7 @@
 				464A0ECC2034813600AE3001 /* smb_bump.wav in Resources */,
 				464A0ECB2034813600AE3001 /* smb_1-up.wav in Resources */,
 				8531BC291C6E68C000C378E1 /* Lives.sks in Resources */,
-				464A0EA720347C8700AE3001 /* smb_mariodie.mp3 in Resources */,
 				464A0ECD2034813600AE3001 /* smb_fireworks.wav in Resources */,
-				464A0EA620347C8700AE3001 /* smb_gameover.mp3 in Resources */,
 				464A0ED22034813600AE3001 /* smb_vine.wav in Resources */,
 				850642EA1C67DC0700A61813 /* Main.storyboard in Resources */,
 				464A0EC82034813600AE3001 /* smb_flagpole.wav in Resources */,
