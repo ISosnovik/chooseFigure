@@ -10,6 +10,10 @@ import SpriteKit
 import AVFoundation
 
 class GameScene: SKScene {
+    var skyblue: UIColor = UIColor(red:0.28, green:0.72, blue:0.91, alpha:1.0)
+    var brightRed: UIColor = UIColor(red:0.91, green:0.07, blue:0.31, alpha:1.0)
+    var parrotGreen: UIColor = UIColor(red:0.21, green:0.96, blue:0.33, alpha:1.0)
+    var yellow: UIColor = UIColor(red:0.91, green:0.07, blue:0.31, alpha:1.0)
     var audioPlayer:AVAudioPlayer!
     var level: Int = 1
     var logic: GameActions?
@@ -124,6 +128,8 @@ extension GameScene: GameEvents {
 extension GameScene {
     
     func gameOver() {
+        gameSound(sound: "smb_gameover")
+        gameSpeak(gametext: "Game Over!!!")
         print("Game Over!!!")
     }
     
@@ -132,18 +138,21 @@ extension GameScene {
         let transition = SKTransition.crossFade(withDuration: 0)
         
         let nextLevelScene = GameScene(fileNamed:"GameScene")
+        nextLevelScene!.level = level + 1
         if #available(iOS 10.0, *) {
-            nextLevelScene!.backgroundColor = UIColor(
-                displayP3Red: 1.0,
-                green: 0.0,
-                blue: 0.5,
-                alpha: 1.0
-            )
+            if (nextLevelScene!.level % 2 == 0) {
+                nextLevelScene!.backgroundColor = skyblue
+                print("even")
+            } else if (nextLevelScene!.level % 1 == 0 && nextLevelScene!.level % nextLevelScene!.level == 0) {
+                nextLevelScene!.backgroundColor = yellow
+                print("prime")
+            } else {
+                nextLevelScene!.backgroundColor = brightRed
+            }
         } else {
             // Fallback on earlier versions
         }
-        nextLevelScene!.level = level + 1
-        gameSound(sound: "smb_stage_clear")
+        gameSound(sound: "smb_1-up")
         let levelUpString = "Congrats! You moved to new level" +
             String(nextLevelScene!.level) + " and still have " +
             String(self.lives) + " lives left"
