@@ -129,6 +129,16 @@ extension GameScene {
         let transition = SKTransition.crossFade(withDuration: 0)
         
         let nextLevelScene = GameScene(fileNamed:"GameScene")
+        if #available(iOS 10.0, *) {
+            nextLevelScene!.backgroundColor = UIColor(
+                displayP3Red: 1.0,
+                green: 0.0,
+                blue: 0.5,
+                alpha: 1.0
+            )
+        } else {
+            // Fallback on earlier versions
+        }
         nextLevelScene!.level = level + 1
         let string = "Congrats! You moved to new level" +
             String(nextLevelScene!.level) + " and still have " +
