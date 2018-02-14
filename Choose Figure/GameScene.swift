@@ -7,8 +7,7 @@
 //
 
 import SpriteKit
-
-
+import AVFoundation
 
 class GameScene: SKScene {
     
@@ -84,15 +83,37 @@ extension GameScene: GameEvents {
         // TODO: add action        
         // TODO: play sound
         // TODO: maybe splash
-        print("Cool!!!!")
+        let string = "Good job!"
+        let utterance = AVSpeechUtterance(string: string)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        
+        let synth = AVSpeechSynthesizer()
+        synth.speak(utterance)
+        print(string)
     }
     
     func userDidWrongChoice() {
-        let index = lives - 1
-        let lifeNode = lifeNodes[index]
-        let action = SKAction.fadeAlpha(to: 0.2, duration: 0.1)
-        lifeNode.run(action)
-        print("Fail!!! Lives: \(lives)")
+        if lives > 1 {
+            let index = lives - 1
+            let lifeNode = lifeNodes[index]
+            let action = SKAction.fadeAlpha(to: 0.2, duration: 0.1)
+            lifeNode.run(action)
+            let string = "Oops, Wrong move!"
+            let utterance = AVSpeechUtterance(string: string)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            
+            let synth = AVSpeechSynthesizer()
+            synth.speak(utterance)
+            print(string)
+        } else {
+            let string = "Sorry, out of lives!"
+            let utterance = AVSpeechUtterance(string: string)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            
+            let synth = AVSpeechSynthesizer()
+            synth.speak(utterance)
+            print(string)
+        }
     }
     
 }
