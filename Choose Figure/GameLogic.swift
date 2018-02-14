@@ -15,7 +15,7 @@ let bestScoreKey = "BestScore"
 class GameLogic {
     // Delegate
     var delegate: GameEvents?
-    
+
     // Protocol properties
     var deck: [String]  = []
     var rightFigureName: String?
@@ -39,7 +39,7 @@ class GameLogic {
             }
         }
     }
-    
+
     // Class properties
     // Figure settings
     var deckOfIndices: [Int] = [] // array of indeces of figures
@@ -55,7 +55,7 @@ class GameLogic {
         self.deckSize = deckSize
         // number of figures to choose
         self.numberOfFiguresToChoose = Int.random(minNum:minNumberOfFigures, maxNum:maxNumberOfFigures)
-        
+
         let level = delegate.level
         self.availableNames = figureNamesForLevel(level: level)
         self.rightFigureIndex = Int.random(minNum:0, maxNum: availableNames.count - 1)
@@ -70,13 +70,13 @@ class GameLogic {
 
 // MARK: - Initial Setups
 extension GameLogic {
-    
+
     // configuration of levels
     private func figureNamesForLevel(level: Int) -> [String] {
         if level > 88 {
             return figureNamesForLevel(level: 88)
         }
-        
+
         if level == 1 {
             return ["1_1", "1_2", "1_3"]
         } else {
@@ -87,7 +87,7 @@ extension GameLogic {
             return figureNamesForLevel(level: level - 1) + newImageName
         }
     }
-    
+
     private func generateDeckOfIndices() -> [Int] {
         let forbiddenValue = rightFigureIndex!
         var deck = Int.randoms(numberOfRandoms: deckSize!, minNum: 0, maxNum: availableNames.count - 1, forbiddenValues: [forbiddenValue])
@@ -105,7 +105,7 @@ extension GameLogic {
 
 
 extension GameLogic: GameActions {
-    
+
     func userChoose(index: Int) {
         let figureIndex = deckOfIndices[index]
         if figureIndex == rightFigureIndex {
@@ -125,7 +125,7 @@ extension GameLogic: GameActions {
             }
         }
     }
-    
+
 }
 
 
