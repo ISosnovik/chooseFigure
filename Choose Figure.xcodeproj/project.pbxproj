@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		464A0EA620347C8700AE3001 /* smb_gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 464A0EA320347C8600AE3001 /* smb_gameover.mp3 */; };
+		464A0EA720347C8700AE3001 /* smb_mariodie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 464A0EA420347C8600AE3001 /* smb_mariodie.mp3 */; };
+		464A0EA820347C8700AE3001 /* smb_jump-small.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 464A0EA520347C8600AE3001 /* smb_jump-small.mp3 */; };
+		464A0EAA20347EB600AE3001 /* smb_stage_clear.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 464A0EA920347EB600AE3001 /* smb_stage_clear.mp3 */; };
 		4657FE432034671000F8BF9B /* smb_gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4657FE402034671000F8BF9B /* smb_gameover.mp3 */; };
 		4657FE442034671000F8BF9B /* smb_mariodie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4657FE412034671000F8BF9B /* smb_mariodie.mp3 */; };
 		4657FE452034671000F8BF9B /* smb_jump-small.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4657FE422034671000F8BF9B /* smb_jump-small.mp3 */; };
@@ -27,6 +31,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		464A0EA320347C8600AE3001 /* smb_gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smb_gameover.mp3; sourceTree = "<group>"; };
+		464A0EA420347C8600AE3001 /* smb_mariodie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smb_mariodie.mp3; sourceTree = "<group>"; };
+		464A0EA520347C8600AE3001 /* smb_jump-small.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "smb_jump-small.mp3"; sourceTree = "<group>"; };
+		464A0EA920347EB600AE3001 /* smb_stage_clear.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smb_stage_clear.mp3; sourceTree = "<group>"; };
 		4657FE402034671000F8BF9B /* smb_gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smb_gameover.mp3; sourceTree = "<group>"; };
 		4657FE412034671000F8BF9B /* smb_mariodie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = smb_mariodie.mp3; sourceTree = "<group>"; };
 		4657FE422034671000F8BF9B /* smb_jump-small.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "smb_jump-small.mp3"; sourceTree = "<group>"; };
@@ -62,6 +70,7 @@
 		4657FE2F20345E1000F8BF9B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				464A0EA920347EB600AE3001 /* smb_stage_clear.mp3 */,
 				4657FE402034671000F8BF9B /* smb_gameover.mp3 */,
 				4657FE422034671000F8BF9B /* smb_jump-small.mp3 */,
 				4657FE412034671000F8BF9B /* smb_mariodie.mp3 */,
@@ -88,6 +97,9 @@
 		850642DF1C67DC0700A61813 /* Choose Figure */ = {
 			isa = PBXGroup;
 			children = (
+				464A0EA320347C8600AE3001 /* smb_gameover.mp3 */,
+				464A0EA520347C8600AE3001 /* smb_jump-small.mp3 */,
+				464A0EA420347C8600AE3001 /* smb_mariodie.mp3 */,
 				4657FE2F20345E1000F8BF9B /* Sounds */,
 				859F43DA1C6CFFA400615C18 /* Int.swift */,
 				859F43D71C6CDA7100615C18 /* Configs */,
@@ -192,14 +204,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				850642E31C67DC0700A61813 /* GameScene.sks in Resources */,
+				464A0EA820347C8700AE3001 /* smb_jump-small.mp3 in Resources */,
 				859F43CD1C6CBAAE00615C18 /* etna.otf in Resources */,
 				850642EF1C67DC0700A61813 /* LaunchScreen.storyboard in Resources */,
 				4657FE452034671000F8BF9B /* smb_jump-small.mp3 in Resources */,
 				4657FE442034671000F8BF9B /* smb_mariodie.mp3 in Resources */,
+				464A0EAA20347EB600AE3001 /* smb_stage_clear.mp3 in Resources */,
 				850642EC1C67DC0700A61813 /* Assets.xcassets in Resources */,
 				8541E9361C6B628A00E15F54 /* Deck.sks in Resources */,
 				4657FE432034671000F8BF9B /* smb_gameover.mp3 in Resources */,
 				8531BC291C6E68C000C378E1 /* Lives.sks in Resources */,
+				464A0EA720347C8700AE3001 /* smb_mariodie.mp3 in Resources */,
+				464A0EA620347C8700AE3001 /* smb_gameover.mp3 in Resources */,
 				850642EA1C67DC0700A61813 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

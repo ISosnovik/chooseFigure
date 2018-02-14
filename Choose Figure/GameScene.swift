@@ -10,7 +10,7 @@ import SpriteKit
 import AVFoundation
 
 class GameScene: SKScene {
-    
+    var audioPlayer:AVAudioPlayer!
     var level: Int = 1
     var logic: GameActions?
         
@@ -80,26 +80,17 @@ extension GameScene: GameEvents {
     
     func userDidRightChoice(index: Int) {
         _ = deckNodes[index]
-        // TODO: add action        
-        // TODO: play sound
-        // TODO: maybe splash
-//        let string = "Good job!"
-//        let utterance = AVSpeechUtterance(string: string)
-//        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-//        
-//        let synth = AVSpeechSynthesizer()
-//        synth.speak(utterance)
-//        print(string)
-        var correctStepSound: AVAudioPlayer = AVAudioPlayer()
-
-        let path = Bundle.main.path(forResource: "smb_jump-small", ofType: ".mp3")
-        let url = URL(fileURLWithPath: path!)
+//        var audioPlayer:AVAudioPlayer!
+        let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_jump-small", ofType: "mp3")!)
         do {
-            correctStepSound = try AVAudioPlayer(contentsOf: url)
-            correctStepSound.play()
+            audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
+            
+            // check if audioPlayer is prepared to play audio
+            if audioPlayer.prepareToPlay() {
+                audioPlayer.play()
+            }
         } catch {
-            print("I am here")
-            print(error)
+            
         }
     }
     
@@ -109,10 +100,22 @@ extension GameScene: GameEvents {
             let lifeNode = lifeNodes[index]
             let action = SKAction.fadeAlpha(to: 0.2, duration: 0.1)
             lifeNode.run(action)
+
+            let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_mariodie", ofType: "mp3")!)
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
+                
+                // check if audioPlayer is prepared to play audio
+                if audioPlayer.prepareToPlay() {
+                    audioPlayer.play()
+                }
+            } catch {
+                
+            }
             let string = "Oops, Wrong move!"
             let utterance = AVSpeechUtterance(string: string)
             utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-            
+
             let synth = AVSpeechSynthesizer()
             synth.speak(utterance)
             print(string)
@@ -151,6 +154,18 @@ extension GameScene {
             // Fallback on earlier versions
         }
         nextLevelScene!.level = level + 1
+        let audioURL = URL(fileURLWithPath: Bundle.main.path(forResource: "smb_stage_clear", ofType: "mp3")!)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
+            
+            // check if audioPlayer is prepared to play audio
+            if audioPlayer.prepareToPlay() {
+                audioPlayer.play()
+            }
+        } catch {
+            
+        }
+
         let string = "Congrats! You moved to new level" +
             String(nextLevelScene!.level) + " and still have " +
             String(self.lives) + " lives left"
