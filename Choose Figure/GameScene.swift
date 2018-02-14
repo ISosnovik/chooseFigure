@@ -106,7 +106,7 @@ extension GameScene: GameEvents {
             synth.speak(utterance)
             print(string)
         } else {
-            let string = "Sorry, out of lives it!"
+            let string = "Sorry, out of lives!"
             let utterance = AVSpeechUtterance(string: string)
             utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
             

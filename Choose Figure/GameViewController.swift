@@ -21,6 +21,16 @@ class GameViewController: UIViewController {
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
+            if #available(iOS 10.0, *) {
+                scene.backgroundColor = UIColor(
+                    displayP3Red: 1.0,
+                    green: 0.0,
+                    blue: 0.5,
+                    alpha: 1.0
+                )
+            } else {
+                // Fallback on earlier versions
+            }
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .aspectFill
